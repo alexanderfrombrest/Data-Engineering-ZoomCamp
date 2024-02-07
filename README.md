@@ -116,7 +116,7 @@
 *Homework 2*
 
     Q1: 266,855 rows x 20 columns
-    Q2:
+    Q2: 139,370 rows
     Q3:
     Q4:
     Q5:
