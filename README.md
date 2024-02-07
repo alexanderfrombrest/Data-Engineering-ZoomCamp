@@ -114,6 +114,7 @@
     Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
     
 *Homework 2*
+
     Q1: 266,855 rows x 20 columns
     Q2:
     Q3:
