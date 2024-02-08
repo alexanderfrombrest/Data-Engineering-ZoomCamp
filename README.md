@@ -117,7 +117,7 @@
 
     Q1: 266,855 rows x 20 columns
     Q2: 139,370 rows
-    Q3:
+    Q3: answ.3 data['lpep_pickup_date'] = data['lpep_pickup_datetime'].dt.date 
     Q4:
     Q5:
     Q6:
