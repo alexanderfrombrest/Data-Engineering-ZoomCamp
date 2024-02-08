@@ -116,8 +116,135 @@
 *Homework 2*
 
     Q1: 266,855 rows x 20 columns
+        
+            import io
+        import pandas as pd
+        import requests
+        if 'data_loader' not in globals():
+            from mage_ai.data_preparation.decorators import data_loader
+        if 'test' not in globals():
+            from mage_ai.data_preparation.decorators import test
+        
+        
+        @data_loader
+        def load_data_from_api(*args, **kwargs):
+            """
+            Template for loading data from API
+            """
+            appended_data = []
+            for i in range(10,13):
+        
+                url = f"https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2020-{i}.csv.gz"
+                print(url)
+                taxi_dtypes = {
+                                'passenger_count': pd.Int64Dtype(),
+                                'trip_distance': float,
+                                'RatecodeID':pd.Int64Dtype(),
+                                'store_and_fwd_flag':str,
+                                'PULocationID':pd.Int64Dtype(),
+                                'DOLocationID':pd.Int64Dtype(),
+                                'payment_type': pd.Int64Dtype(),
+                                'fare_amount': float,
+                                'extra':float,
+                                'mta_tax':float,
+                                'tip_amount':float,
+                                'tolls_amount':float,
+                                'improvement_surcharge':float,
+                                'total_amount':float,
+                                'congestion_surcharge':float  
+                }
+        
+                # native date parsing 
+                parse_dates = ['lpep_pickup_datetime', 'lpep_dropoff_datetime']
+        
+        
+                data = pd.read_csv(url, sep=',', compression='gzip',dtype = taxi_dtypes, parse_dates = parse_dates)
+                appended_data.append(data)
+        
+            appended_data = pd.concat(appended_data)
+            
+            return appended_data
+        
+            #, dtype=taxi_dtypes, parse_dates=parse_dates
+        
+        @test
+        def test_output(output, *args) -> None:
+            """
+            Template code for testing the output of the block.
+            """
+            assert output is not None, 'The output is undefined'
+    
     Q2: 139,370 rows
-    Q3: answ.3 data['lpep_pickup_date'] = data['lpep_pickup_datetime'].dt.date 
-    Q4:
-    Q5:
-    Q6:
+
+                        if 'transformer' not in globals():
+                from mage_ai.data_preparation.decorators import transformer
+            if 'test' not in globals():
+                from mage_ai.data_preparation.decorators import test
+            
+            
+            @transformer
+            def transform(data, *args, **kwargs):
+                # Specify your transformation logic here
+                data['lpep_pickup_date'] = data['lpep_pickup_datetime'].dt.date
+            
+            
+                data1 = data[data['passenger_count'] > 0]
+                return data1[data1['trip_distance'] > 0]
+            
+            
+            @test
+            def test_output(output, *args) -> None:
+                """
+                Template code for testing the output of the block.
+                """
+                assert output is not None, 'The output is undefined'
+            
+    Q3: answ.3 data['lpep_pickup_date'] = data['lpep_pickup_datetime'].dt.date
+
+    
+    Q4: 1 or 2
+
+        SELECT VendorID
+        FROM mage.green_taxi
+        GROUP BY VendorID
+    
+    Q5: 4
+
+        
+    
+    Q6: 96 parts
+
+                    from mage_ai.settings.repo import get_repo_path
+        from mage_ai.io.config import ConfigFileLoader
+        from mage_ai.io.google_cloud_storage import GoogleCloudStorage
+        from pandas import DataFrame
+        import pyarrow as pa 
+        import pyarrow.parquet as pq
+        import os
+        
+        # Set the path to the credentials file
+        credentials_file = "/home/src/silent-blade-412220-f684e4cab1ad.json"
+        
+        # Set the environment variable directly
+        os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_file
+        
+        
+        bucket_name = 'mage-zoomcamp-hutsal'
+        project_id = 'silent-blade-412220'
+        table_name = 'green_taxi_data'
+        
+        root_path = f'{bucket_name}/{table_name}'
+        
+        @data_exporter
+        def export_data(data1, *args, **kwargs):
+            
+            table = pa.Table.from_pandas(data1)
+        
+            gcs = pa.fs.GcsFileSystem()
+        
+            pq.write_to_dataset(
+                table,
+                root_path=root_path,
+                partition_cols=['lpep_pickup_date'],
+                filesystem=gcs
+            )
