@@ -260,7 +260,15 @@
         SELECT COUNT(1) FROM silent-blade-412220.ny_taxi.green_taxi_data_h3
         WHERE fare_amount = 0
     Q4:
+
+        
     Q5:
+        
+        
     Q6:
+        
+        
     Q7:
+
+        
     
