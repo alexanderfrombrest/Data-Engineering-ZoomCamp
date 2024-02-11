@@ -250,11 +250,17 @@
             )
 *Homework 3*
 
-    Q1
-    Q2
-    Q3
-    Q4
-    Q5
-    Q6
-    Q7
+    Q1: 840,402
+    
+    Q2: 0 MB for the External Table and 6.41MB for the Materialized Table
+         SELECT COUNT(1) FROM silent-blade-412220.ny_taxi.green_taxi_data_h3
+         GROUP BY PULocationID
+        
+    Q3: 1,622
+        SELECT COUNT(1) FROM silent-blade-412220.ny_taxi.green_taxi_data_h3
+        WHERE fare_amount = 0
+    Q4:
+    Q5:
+    Q6:
+    Q7:
     
