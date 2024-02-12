@@ -262,7 +262,7 @@
     Q4: answ. 2 "Partition by lpep_pickup_datetime Cluster on PUlocationID"
 
         
-    Q5: 
+    Q5: 12.82 MB for non-partitioned table and 1.12 MB for the partitioned table
         
         
     Q6: GCP Bucket     
