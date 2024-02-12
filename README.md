@@ -268,7 +268,7 @@
     Q6: GCP Bucket     
         
         
-    Q7:
+    Q7: false: clustering/partitioning could increase costs of querring for smaller tables (<1GB) compared to not using those techniques.
 
         
     
