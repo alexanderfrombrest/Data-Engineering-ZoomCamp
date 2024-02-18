@@ -270,5 +270,25 @@
         
     Q7: false: clustering/partitioning could increase costs of querring for smaller tables (<1GB) compared to not using those techniques.
 
+*Homework dlt workshop*
+
+    Q1: Sum is: 8.382332347441762
+    Q2: 13th value is: 3.605551275463989
+    Q3: 353
+    Q4: 266
+
+        def square_root_generator(limit):
+        n = 1
+        while n <= limit:
+            yield n ** 0.5
+            n += 1
+
+        # Example usage:
+        limit = 5
+        sum = 0
+        generator = square_root_generator(limit)
         
-    
+        for sqrt_value in generator:
+            sum += sqrt_value
+            print(sqrt_value)
+        print (f"Sum is: {sum}")
