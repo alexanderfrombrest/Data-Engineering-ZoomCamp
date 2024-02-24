@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: staging
+    database: silent-blade-412220
+    schema: trips_data_all
+
+      # loaded_at_field: record_loaded_at
+    tables:
+      - name: green_tripdata
+      - name: yellow_tripdata
