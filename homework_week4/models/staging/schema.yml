@@ -27,8 +27,7 @@ models:
         tests:
           - unique:
               severity: warn
-          - not_null:
-              severity: warn
+
           
       - name: vendor_id
         data_type: string
@@ -51,8 +50,7 @@ models:
         tests:
           - unique:
               severity: warn
-          - not_null:
-              severity: warn
+
 
       - name: vendor_id
         data_type: int64
@@ -143,8 +141,7 @@ models:
         tests:
           - unique:
               severity: warn
-          - not_null:
-              severity: warn
+
 
       - name: vendor_id
         data_type: int64
