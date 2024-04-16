@@ -292,3 +292,49 @@
             sum += sqrt_value
             print(sqrt_value)
         print (f"Sum is: {sum}")
+
+
+*Homework risingwave workshop*
+
+    -- Q3
+    DROP MATERIALIZED VIEW q1
+    
+    CREATE MATERIALIZED VIEW q1 AS
+    SELECT
+            taxi_zone_pu.Zone as pickup_zone,
+            count(1) as count
+        FROM
+            trip_data
+        JOIN taxi_zone as taxi_zone_pu
+            ON trip_data.PULocationID = taxi_zone_pu.location_id
+        WHERE
+            trip_data.tpep_pickup_datetime > ('2022-01-02 17:53:33') AND trip_data.tpep_pickup_datetime < ('2022-01-03 10:53:33')
+        GROUP BY 
+            pickup_zone
+        ORDER BY count;
+    
+    SELECT * FROM q1 order by count desc;
+
+
+    --Q1, Q2
+    WITH t AS (
+        SELECT 
+            tpep_pickup_datetime,
+            tpep_dropoff_datetime,
+            total_amount,
+            tpep_dropoff_datetime-tpep_pickup_datetime AS trip_time,
+            taxi_zone_PU.Zone AS pickup_zone,
+            taxi_zone_DO.Zone AS dropoff_zone
+        FROM trip_data
+        JOIN taxi_zone AS taxi_zone_PU
+            ON trip_data.PULocationID = taxi_zone_PU.location_id
+        JOIN taxi_zone AS taxi_zone_DO
+            ON trip_data.DOLocationID = taxi_zone_DO.location_id)   
+    
+    SELECT COUNT(*), AVG(trip_time) AS trip_time_avg, MAX(trip_time), MIN(trip_time), CONCAT(pickup_zone,' / ', dropoff_zone) AS pudopair
+    FROM t
+    GROUP BY pudopair
+    ORDER BY trip_time_avg DESC
+    LIMIT 100;
+
+
