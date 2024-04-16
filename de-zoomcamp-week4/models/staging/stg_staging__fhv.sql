@@ -19,6 +19,10 @@ select
     -- timestamps
     cast(pickup_datetime as timestamp) as pickup_datetime,
     cast(dropOff_datetime as timestamp) as dropoff_datetime,
+    PUlocationID,
+    DOlocationID,
+    SR_Flag,
+    Affiliated_base_number
     
 from tripdata
 where rn = 1
