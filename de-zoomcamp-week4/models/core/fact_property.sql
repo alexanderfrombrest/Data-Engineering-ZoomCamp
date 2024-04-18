@@ -29,6 +29,10 @@ select
     
 
 from otodom_property
-where id > 0 AND price_per_m2 > 0
+where 
+    id > 0 AND
+    price_per_m2 > 0 AND    
+    price_per_m2 < 30000 AND
+    form_of_ownership <> "0" AND form_of_ownership <> "do remontu"
 group by otodom_property.link
 
