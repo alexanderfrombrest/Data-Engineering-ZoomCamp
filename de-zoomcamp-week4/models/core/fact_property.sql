@@ -33,7 +33,8 @@ where
     id > 0 AND
     price_per_m2 > 0 AND    
     price_per_m2 < 30000 AND
-    condition <> "0" AND condition <> "do remontu"
+    condition <> "0" AND condition <> "do remontu" AND
+    form_of_ownership <> "0"
 group by otodom_property.link
 order by condition asc
 
